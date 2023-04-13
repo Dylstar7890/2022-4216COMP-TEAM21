@@ -1,0 +1,10 @@
+/DONE Set up a source code repository on GitHub titled "2022-4216COMP-yourgroupname" and share it with the module leader (not guest access).
+/DONE Identify an open data set from sources like Kaggle, data.gov.uk, or GitHub, and agree on your choice with the module leader or lab instructor.
+/DONE Identify insights you want to extract from the data. 
+/DONE Identify you'll enable exploration, such as with menus or keyword searches. Requirements will vary based on the chosen data set.
+Identify
+Identify algorithms to process and analyze the data and design a user interface to interact with your application.
+Prepare a specification document describing insights, requirements, and design.
+Implement algorithms using existing Python packages like Pandas or CSV, saving output in a text form such as console output or a text file. Use Git for source code management.
+Attempt performance optimization or implement more advanced algorithms.
+Give a 20-minute group demonstration during the final week, explaining the chosen data set, implemented processing algorithms, and demonstrating how they work. Include individual visualizations and prepare additional support materials (slides) for the final demonstration. Ensure all students are present, and agree on exceptions with the module leader beforehand.
