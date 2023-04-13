@@ -1,0 +1,24 @@
+With this dataset, various insights can be made regarding the characteristics of popular music over time. Some potential insights could be:
+Trends in musical characteristics over time: By analyzing the data for each year, it is possible to identify trends in characteristics such as danceability, 
+energy, and tempo. For example, it might be interesting to see how danceability has changed over time and whether there are any notable patterns.
+Characteristics of popular songs: By analyzing the most popular songs in the dataset (i.e. those with the highest popularity scores), it is possible to identify 
+common characteristics that make songs popular. For example, it might be interesting to see whether popular songs tend to be more upbeat or have higher energy levels.
+Relationships between different musical characteristics: By analyzing the correlations between different musical characteristics (e.g. energy and loudness), 
+it is possible to gain insight into how these characteristics work together to create different types of music.
+Differences between explicit and non-explicit songs: By comparing the characteristics of songs with explicit content to those without, it might be possible to identify 
+differences in musical style or content that make songs more likely to be labeled as explicit.
+Differences between genres: By comparing the characteristics of songs across different genres (which can be inferred from the list of artists mentioned), it is possible 
+to identify differences in musical style and content that are associated with different genres. For example, it might be interesting to see how the characteristics of 
+rap songs compare to those of rock songs.
+Here are some possible menu options that could be implemented in the UI for exploring the "data.csv" file:
+
+View top songs by year: Users can select a year and view the top 100 songs for that year.
+Search by artist or song name: Users can search for a specific artist or song by entering the artist or song name in the search bar.
+Filter by genre: Users can filter the songs by genre by selecting one or more genre options from a list.
+Sort by various features: Users can sort the songs by various features, such as popularity, tempo, or energy.
+Create playlists: Users can create custom playlists by selecting songs from the dataset and adding them to a playlist.
+Compare two or more songs: Users can select two or more songs and compare various features of those songs side by side.
+View song details: Users can view details of a song, including its duration, popularity, energy level, and other features.
+Discover new music: Users can discover new songs by selecting a specific feature and getting recommendations based on that feature. For example, users could select 
+"high energy" and get recommendations for songs with high energy levels.
+View artist details: Users can view details of an artist, including their top songs, albums, and other information.
