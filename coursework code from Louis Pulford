@@ -1,0 +1,142 @@
+import pandas as pd
+import tkinter as tk
+
+# Read CSV file into a Pandas DataFrame
+df = pd.read_csv('C:\\Users\\Louis Pulford\\Desktop\\SpotifyDataBackup.csv', encoding='iso-8859-1')
+
+root = tk.Tk()
+
+
+class ViewTopSongs:
+
+    years = df['year'].unique().tolist()
+
+
+    # Function to display the top 100 songs for a given year
+    def view_top_songs_by_year(self,UserYear):
+        # Filter the DataFrame by year
+        year_df = df[df['year'] == UserYear]
+        # Sort the resulting DataFrame by popularity in descending order
+        year_df = year_df.sort_values(by='popularity', ascending=False)
+        # Select the top 100 rows of the sorted DataFrame
+        top_songs_df = year_df.head(100)
+        # Display the resulting DataFrame to the user
+        print(top_songs_df)
+
+class SearchByName:
+
+    # Function to search for songs or artists by name
+    def search_by_name(self,name):
+        # Filter the DataFrame using the search query
+        name_df = df[df['artists'].str.contains(name, case=False)]
+        # Display the resulting DataFrame to the user
+        print(name_df)
+
+class FilterByGenre:
+    pass
+
+class SortByFeatures:
+    # Function to sort the DataFrame by a given feature
+    def sort_by_feature(self,feature, ascending=True):
+        # Sort the DataFrame by the selected feature in ascending or descending order
+        sorted_df = df.sort_values(by=feature, ascending=ascending)
+        # Display the resulting DataFrame to the user
+        print(sorted_df)
+
+
+class CreatePlaylist:
+    # Function to create a playlist from selected songs
+    def create_playlist(self,selected_songs):
+        # Create a new DataFrame containing the selected songs
+        playlist_df = df[df['id'].isin(selected_songs)]
+        # Display the resulting DataFrame to the user
+        print(playlist_df)
+
+
+
+
+
+
+class MusicApp:
+    def __init__(self):
+        self.__view_top_songs = tk.IntVar(value=0)
+        self.__search_by_name = tk.IntVar(value=0)
+        self.__filter_by_genre = tk.IntVar(value=0)
+        self.__sort_by_feature = tk.IntVar(value=0)
+        self.__create_playlists = tk.IntVar(value=0)
+        self.__compare_songs = tk.IntVar(value=0)
+        self.__view_song_details = tk.IntVar(value=0)
+        self.__discover_music = tk.IntVar(value=0)
+        self.__view_artist_details = tk.IntVar(value=0)
+        self.__top_songs = ViewTopSongs()
+        self.__by_name = SearchByName()
+        self.__by_genre = FilterByGenre()
+        self.__by_feature = SortByFeatures()
+        self.__create_playlists = tk.BooleanVar(value=False)
+
+        # Create checkboxes for each feature
+        tk.Label(root, text="Select features:").pack()
+        tk.Checkbutton(root, text="View top songs by year", variable=self.__view_top_songs).pack()
+        tk.Checkbutton(root, text="Search by artist or song name", variable=self.__search_by_name).pack()
+        tk.Checkbutton(root, text="Filter by genre", variable=self.__filter_by_genre).pack()
+        tk.Checkbutton(root, text="Sort by various features", variable=self.__sort_by_feature).pack()
+        tk.Checkbutton(root, text="Create playlists", variable=self.__create_playlists).pack()
+        tk.Checkbutton(root, text="Compare two or more songs", variable=self.__compare_songs).pack()
+        tk.Checkbutton(root, text="View song details", variable=self.__view_song_details).pack()
+        tk.Checkbutton(root, text="Discover new music", variable=self.__discover_music).pack()
+        tk.Checkbutton(root, text="View artist details", variable=self.__view_artist_details).pack()
+
+        # Create button to submit selections
+        tk.Button(root, text="Submit", command=self.submit_selections).pack()
+
+        root.mainloop()
+
+    def submit_selections(self,):
+
+        # Do something with the selected features
+        if self.__view_top_songs.get():
+            UserYear = int(input("from which year would you like to see the top songs for?"))
+            top_songs_view = ViewTopSongs()
+            top_songs_view.view_top_songs_by_year(UserYear)
+
+        if self.__search_by_name.get():
+            name = input("what is the name of desired song or artist?")
+            by_name_view = SearchByName()
+            by_name_view.search_by_name(name)
+
+        if self.__filter_by_genre.get():
+            print("Filter by genre")
+
+
+
+
+
+        if self.__sort_by_feature.get():
+            feature = input("by which feature would you like to search by?")
+            by_feature_view = SortByFeatures()
+            by_feature_view.sort_by_feature(feature)
+
+
+        if self.__create_playlists.get():
+            print("Create playlists")
+            selected_songs = input("please enter the songs IDs from the database, with a comma inbetween each song:")
+            by_create_playlist = CreatePlaylist()
+            by_create_playlist.create_playlist(selected_songs.split(","))
+
+
+
+
+        if self.__compare_songs.get():
+            print("Compare two or more songs")
+        if self.__view_song_details.get():
+            print("View song details")
+        if self.__discover_music.get():
+            print("Discover new music")
+        if self.__view_artist_details.get():
+            print("View artist details")
+
+
+if __name__ == "__main__":
+    app = MusicApp()
+
+# Print the DataFrame
