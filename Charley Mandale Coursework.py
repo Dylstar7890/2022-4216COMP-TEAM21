@@ -1,0 +1,35 @@
+import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns
+import openpyxl
+
+data = pd.read_excel("SpotifyDataBackup.xlsx")
+df = pd.DataFrame(data)
+df.get('year', default=0)
+df.columns = df.columns.str.strip()
+data = data.iloc[:, 1:]
+
+fig, axs = plt.subplots(4, 1)
+
+data = data.set_index("danceability")
+axs[0].set_title("How does song danceability change by release year?")
+axs[0].set_xlabel("Songs By Year")
+axs[0].set_ylabel("Danceability")
+axs[0].plot(data['release_date'], data.index)
+
+axs[1].set_title("How does song danceability affect the popularity of the song??")
+axs[1].set_xlabel("Popularity")
+axs[1].set_ylabel("Danceability")
+axs[1].bar(data['popularity'], data.index)
+
+axs[2].set_title("How is song popularity affected by tempo?")
+axs[2].set_xlabel("Popularity")
+axs[2].set_ylabel("Tempo")
+axs[2].bar(data['popularity'], data['tempo'])
+
+axs[3].set_title("How is song popularity affected by release date?")
+axs[3].set_xlabel("Release Date")
+axs[3].set_ylabel("Popularity")
+axs[3].bar(data['release_date'], data['popularity'])
+
+plt.show()
