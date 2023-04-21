@@ -1,8 +1,13 @@
 import pandas as pd
 import tkinter as tk
 
+# Outputs all the rows and columns of the csv rather than just showing "..."
+pd.set_option('display.max_rows', 1000); 
+pd.set_option('display.max_columns', 1000); 
+pd.set_option('display.width', 1000)
+
 # Read CSV file into a Pandas DataFrame
-df = pd.read_csv('C:\\Users\\Louis Pulford\\Desktop\\SpotifyDataBackup.csv', encoding='iso-8859-1')
+df = pd.read_csv('C:\\Users\\paddy\\Downloads\\data.csv', encoding='iso-8859-1')
 
 root = tk.Tk()
 
@@ -12,16 +17,17 @@ class ViewTopSongs:
     years = df['year'].unique().tolist()
 
 
-    # Function to display the top 100 songs for a given year
+    # Function to display the top 5 songs for a given year
     def view_top_songs_by_year(self,UserYear):
         # Filter the DataFrame by year
         year_df = df[df['year'] == UserYear]
         # Sort the resulting DataFrame by popularity in descending order
         year_df = year_df.sort_values(by='popularity', ascending=False)
-        # Select the top 100 rows of the sorted DataFrame
-        top_songs_df = year_df.head(100)
+        # Select the top 5 rows of the sorted DataFrame
+        top_songs_df = year_df.head(5)
         # Display the resulting DataFrame to the user
         print(top_songs_df)
+
 
 class SearchByName:
 
@@ -52,6 +58,42 @@ class CreatePlaylist:
         # Display the resulting DataFrame to the user
         print(playlist_df)
 
+class SongDetails:
+    # Function to display all details of a selected song
+    def view_details(self, song_name):
+        song_name_df = df[df['name'].str.contains(song_name, case=False)]
+        # Display the resulting DataFrame to the user
+        print(song_name_df)
+
+class ArtistDetails:
+    #Function to display top songs of a certain artist
+    def artist_details(self, artist_name):
+        #Filter the dataframe by artist
+        artist_df = df[df['artists'].str.contains(artist_name, case=False)]
+        # Sort the resulting DataFrame by popularity in descending order
+        artist_df = artist_df.sort_values(by='popularity', ascending=False)
+        # Select the top 5 rows of the sorted DataFrame
+        artist_top_df = artist_df.head(5)
+        # Display the resulting DataFrame to the user
+        print("Top 5 songs by ", artist_name,  ":")
+        print(artist_top_df)
+
+class CompareSongs:
+    # Function to compare one or more songs
+    def compare_songs(self, song1, song2):
+        song1_df = df[df['name'].str.contains(song1, case=False)]
+        song2_df = df[df['name'].str.contains(song2, case=False)]
+        # Limits the results to only the first 
+        song1_df = song1_df.head(1)
+        song2_df = song2_df.head(1)
+        # Display the resulting DataFrame to the user
+        print(song1_df)
+        print(song2_df)
+
+
+
+
+
 
 
 
@@ -61,7 +103,7 @@ class MusicApp:
     def __init__(self):
         self.__view_top_songs = tk.IntVar(value=0)
         self.__search_by_name = tk.IntVar(value=0)
-        self.__filter_by_genre = tk.IntVar(value=0)
+        #self.__filter_by_genre = tk.IntVar(value=0)
         self.__sort_by_feature = tk.IntVar(value=0)
         self.__create_playlists = tk.IntVar(value=0)
         self.__compare_songs = tk.IntVar(value=0)
@@ -70,7 +112,7 @@ class MusicApp:
         self.__view_artist_details = tk.IntVar(value=0)
         self.__top_songs = ViewTopSongs()
         self.__by_name = SearchByName()
-        self.__by_genre = FilterByGenre()
+        #self.__by_genre = FilterByGenre()
         self.__by_feature = SortByFeatures()
         self.__create_playlists = tk.BooleanVar(value=False)
 
@@ -78,7 +120,7 @@ class MusicApp:
         tk.Label(root, text="Select features:").pack()
         tk.Checkbutton(root, text="View top songs by year", variable=self.__view_top_songs).pack()
         tk.Checkbutton(root, text="Search by artist or song name", variable=self.__search_by_name).pack()
-        tk.Checkbutton(root, text="Filter by genre", variable=self.__filter_by_genre).pack()
+       # tk.Checkbutton(root, text="Filter by genre", variable=self.__filter_by_genre).pack()
         tk.Checkbutton(root, text="Sort by various features", variable=self.__sort_by_feature).pack()
         tk.Checkbutton(root, text="Create playlists", variable=self.__create_playlists).pack()
         tk.Checkbutton(root, text="Compare two or more songs", variable=self.__compare_songs).pack()
@@ -127,13 +169,32 @@ class MusicApp:
 
 
         if self.__compare_songs.get():
+            # Takes the names of two songs to compare them in the function
             print("Compare two or more songs")
+            song1 = input("Please enter the name of the first song for comparison: ")
+            song2 = input("Please enter the name of the second song for comparison: ")
+            by_compare_songs = CompareSongs()
+            by_compare_songs.compare_songs(song1,song2)
+
+
         if self.__view_song_details.get():
+            # Takes the requested song and sends it to the function
             print("View song details")
+            song_name = input("Please enter the name of the song you would like to see the details of: ")
+            by_song_details = SongDetails()
+            by_song_details.view_details(song_name)
+
         if self.__discover_music.get():
             print("Discover new music")
+
         if self.__view_artist_details.get():
+            # Takes the user input for the artist and sends it to the function
             print("View artist details")
+            artist_name = input("Please enter the name of the artist you would like to see the details of: ")
+            top_artist_details = ArtistDetails()
+            top_artist_details.artist_details(artist_name)
+
+
 
 
 if __name__ == "__main__":
