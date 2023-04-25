@@ -9,6 +9,5 @@ Dylan Murphy Data Visualisation:
 -pip install pandas 
 -pip install pandas
 -change line 6 of the code to matchup with where "SpotifyDataBackup.csv" is stored on your system
--make sure the dataset is correctly titled and is in the proper format of .csv and not any other (such as .xlsx)
-
+-make sure the dataset is correctly titled and is in the proper format of .csv and not any other (such as .xlsx).
 Lana Maslobojeva Visualisation: pip install matplotlib, pip install pandas, pip install numpy.
