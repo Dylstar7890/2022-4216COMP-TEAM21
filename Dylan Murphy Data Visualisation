@@ -1,0 +1,31 @@
+# Imports required libraries
+import pandas as pd
+import matplotlib.pyplot as plt
+
+# Load the Spotify dataset
+data = pd.read_csv("C:\\Users\\Dylan\\OneDrive\\Documents\\SpotifyDataBackup.csv")
+
+# Convert the year column to a datetime object and extract the decade
+data['year'] = pd.to_datetime(data['year'], format='%Y')
+data['decade'] = (data['year'].dt.year // 10) * 10
+
+# Group by decade and find the average popularity of the top 10 songs
+popularity_by_decade = data.groupby('decade').apply(lambda x: x.nlargest(10, 'popularity')['popularity'].mean())
+
+# Plot the average popularity over time
+plt.plot(popularity_by_decade.index, popularity_by_decade.values)
+plt.title('Average Popularity of Top 10 Songs by Decade')
+plt.xlabel('Decade')
+plt.ylabel('Popularity')
+plt.show()
+
+
+# Group by decade and find the average tempo of the top 10 songs
+top10_tempos = data.groupby(['decade']).apply(lambda x: x.nlargest(10, 'popularity')['tempo'].mean())
+
+# Plot the average tempo over time
+plt.plot(top10_tempos.index, top10_tempos.values)
+plt.title('Average Tempo of Top 10 Songs by Decade')
+plt.xlabel('Decade')
+plt.ylabel('Average Tempo')
+plt.show()
