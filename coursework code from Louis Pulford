@@ -108,7 +108,6 @@ class MusicApp:
         self.__create_playlists = tk.IntVar(value=0)
         self.__compare_songs = tk.IntVar(value=0)
         self.__view_song_details = tk.IntVar(value=0)
-        self.__discover_music = tk.IntVar(value=0)
         self.__view_artist_details = tk.IntVar(value=0)
         self.__top_songs = ViewTopSongs()
         self.__by_name = SearchByName()
@@ -125,7 +124,6 @@ class MusicApp:
         tk.Checkbutton(root, text="Create playlists", variable=self.__create_playlists).pack()
         tk.Checkbutton(root, text="Compare two or more songs", variable=self.__compare_songs).pack()
         tk.Checkbutton(root, text="View song details", variable=self.__view_song_details).pack()
-        tk.Checkbutton(root, text="Discover new music", variable=self.__discover_music).pack()
         tk.Checkbutton(root, text="View artist details", variable=self.__view_artist_details).pack()
 
         # Create button to submit selections
@@ -183,9 +181,7 @@ class MusicApp:
             song_name = input("Please enter the name of the song you would like to see the details of: ")
             by_song_details = SongDetails()
             by_song_details.view_details(song_name)
-
-        if self.__discover_music.get():
-            print("Discover new music")
+            
 
         if self.__view_artist_details.get():
             # Takes the user input for the artist and sends it to the function
