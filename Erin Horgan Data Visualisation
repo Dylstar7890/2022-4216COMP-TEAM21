@@ -1,0 +1,24 @@
+
+class SearchByName:
+	
+
+	    # Function to search for songs or artists by name
+	    def search_by_name(self,name):
+	        # Filter the DataFrame using the search query
+	        name_df = df[df['artists'].str.contains(name, case=False)]
+	        # Display the resulting DataFrame to the user
+	        print(name_df)
+
+
+class ArtistDetails:
+	    #Function to display top songs of a certain artist
+	    def artist_details(self, artist_name):
+	        #Filter the dataframe by artist
+	        artist_df = df[df['artists'].str.contains(artist_name, case=False)]
+	        # Sort the resulting DataFrame by popularity in descending order
+	        artist_df = artist_df.sort_values(by='popularity', ascending=False)
+	        # Select the top 5 rows of the sorted DataFrame
+	        artist_top_df = artist_df.head(5)
+	        # Display the resulting DataFrame to the user
+	        print("Top 5 songs by ", artist_name,  ":")
+	        print(artist_top_df)
