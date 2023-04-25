@@ -1,0 +1,12 @@
+import pandas as pd
+import matplotlib.pyplot as plt
+
+# Read the data from the CSV file
+df = pd.read_csv('https://drive.google.com/uc?id=<your_file_id>&export=download')
+
+# Plot the scatter plot of valence over popularity
+plt.scatter(df['popularity'], df['valence'])
+plt.title('Valence over Popularity')
+plt.xlabel('Popularity')
+plt.ylabel('Valence')
+plt.show()
